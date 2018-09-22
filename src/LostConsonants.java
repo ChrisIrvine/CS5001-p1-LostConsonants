@@ -14,12 +14,12 @@ import java.util.regex.*;
  * @version 1
  * @dateEdited 22/09/2018
  */
-public class LostConstonants {
+public class LostConsonants {
     public static ArrayList<String> dict;
     public static ArrayList<String> results;
 
     /**
-     * Main method for LostConstonants class
+     * Main method for LostConsonants class
      * @param args - [0] file path to dictionary, [1] word, phrase or sentance
      *             to manipulate
      */
@@ -118,10 +118,7 @@ public class LostConstonants {
 
     /**
      * QuickSort method inspired by experience with Data Structures and
-     * Algorithms module in 2nd Year of UG. Clarification on bug in partition
-     * method from Stack Overflow post
-     * (https://stackoverflow.com/questions/11196571/quick-sort-sorts-descending
-     * -not-ascending)
+     * Algorithms module in 2nd Year of UG. 
      *
      * @param target
      * @param low
