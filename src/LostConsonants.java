@@ -118,7 +118,7 @@ public class LostConsonants {
 
     /**
      * QuickSort method inspired by experience with Data Structures and
-     * Algorithms module in 2nd Year of UG. 
+     * Algorithms module in 2nd Year of UG.
      *
      * @param target
      * @param low
