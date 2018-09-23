@@ -48,7 +48,7 @@ public class LostConsonants {
         s = removeFullStop(s);
 
         //mutate and validate string
-        results = loseConstonant(s);
+        results = loseConsonant(s);
 
         //print the results
         if (!results.isEmpty()) {
@@ -101,13 +101,13 @@ public class LostConsonants {
 
     /**
      * Using regex (inspired by my Information Retrieval background), find and
-     * count the constonants in phrase and remove them one at a time, checking
+     * count the consonants in phrase and remove them one at a time, checking
      * each new word to see if it valid.
      *
      * @param phrase - String to mutate
      * @return - Filled and Valid ArrayList of Mutated Strings
      */
-    public static ArrayList<String> loseConstonant(String phrase) {
+    public static ArrayList<String> loseConsonant(String phrase) {
         //Create the remove ArrayList of Integers
         ArrayList<Integer> remove;
         /*Remove the consonants from phrase one at a time and add results to
