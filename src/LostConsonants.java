@@ -162,6 +162,7 @@ public class LostConsonants {
      * (remove) which is returned
      *
      * @param holder - ArrayList of Strings holding current results
+     * @param dict - ArrayList of Strings to validate mutated words against
      * @return - ArrayList of Integers containing indexes to remove from results
      */
     public static ArrayList<Integer> dictCheck(ArrayList<String> holder,
