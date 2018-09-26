@@ -16,8 +16,6 @@ import java.util.regex.Matcher;
 public class LostConsonants {
     /** List of String Arrays to hold the given dictionary. */
     private static ArrayList<String> dict;
-//    /** List of String Arrays to hold the results of LostConsonants. */
-//    private static ArrayList<String> results;
     /** boolean variable to account for removed full stops from given String. */
     private static boolean removedStop = false;
     /** Case 0 for args checker. */
