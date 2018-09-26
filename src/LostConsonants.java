@@ -1,5 +1,4 @@
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -17,8 +16,8 @@ import java.util.regex.Matcher;
 public class LostConsonants {
     /** List of String Arrays to hold the given dictionary. */
     private static ArrayList<String> dict;
-    /** List of String Arrays to hold the results of LostConsonants. */
-    private static ArrayList<String> results;
+//    /** List of String Arrays to hold the results of LostConsonants. */
+//    private static ArrayList<String> results;
     /** boolean variable to account for removed full stops from given String. */
     private static boolean removedStop = false;
     /** Case 0 for args checker. */
@@ -34,12 +33,12 @@ public class LostConsonants {
      *             to manipulate
      */
     public static void main(String[] args) {
+        ArrayList<String> results;
         //validate the arguments passed
         argsCheck(args);
 
         //read in dictionary from command line
         dict = FileUtil.readLines(args[0]);
-        results = new ArrayList<String>();
 
         //read in the String from command line
         String s = args[1];
@@ -50,15 +49,16 @@ public class LostConsonants {
         //mutate and validate string
         results = loseConsonant(s);
 
+        printResults(results);
         //print the results
-        if (!results.isEmpty()) {
-            for (int i = 0; i < results.size(); i++) {
-                System.out.println(results.get(i));
-            }
-            System.out.println("Found " + results.size() + " alternatives.");
-        } else {
-            System.out.println("Could not find any alternatives.");
-        }
+//        if (!results.isEmpty()) {
+//            for (int i = 0; i < results.size(); i++) {
+//                System.out.println(results.get(i));
+//            }
+//            System.out.println("Found " + results.size() + " alternatives.");
+//        } else {
+//            System.out.println("Could not find any alternatives.");
+//        }
     }
 
     /**
@@ -96,7 +96,6 @@ public class LostConsonants {
                     + "aborting.");
             System.exit(0);
         }
-
     }
 
     /**
@@ -325,5 +324,17 @@ public class LostConsonants {
         }
 
         return s;
+    }
+
+    public static void printResults(ArrayList<String> results) {
+        //print the results
+        if (!results.isEmpty()) {
+            for (int i = 0; i < results.size(); i++) {
+                System.out.println(results.get(i));
+            }
+            System.out.println("Found " + results.size() + " alternatives.");
+        } else {
+            System.out.println("Could not find any alternatives.");
+        }
     }
 }

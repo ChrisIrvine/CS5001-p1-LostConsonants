@@ -12,16 +12,16 @@ import java.util.ArrayList;
 public class LostVowels {
     /** List of String Arrays to hold the given dictionary. */
     private static ArrayList<String> dict;
-    /** List of String Arrays to hold the results of LostVowels. */
-    private static ArrayList<String> results;
-    /** boolean variable to account for removed full stops from given String. */
-    private static boolean removedStop = false;
-    /** Case 0 for args checker. */
-    private static final int ZERO = 0;
-    /** Case 1 for args checker. */
-    private static final int ONE = 1;
-    /** Case 3 for args checker. */
-    private static final int THREE = 3;
+//    /** List of String Arrays to hold the results of LostVowels. */
+//    private static ArrayList<String> results;
+//    /** boolean variable to account for removed full stops from given String. */
+//    private static boolean removedStop = false;
+//    /** Case 0 for args checker. */
+//    private static final int ZERO = 0;
+//    /** Case 1 for args checker. */
+//    private static final int ONE = 1;
+//    /** Case 3 for args checker. */
+//    private static final int THREE = 3;
 
     /**
      * Main method for LostVowels class.
@@ -29,12 +29,13 @@ public class LostVowels {
      *             to manipulate
      */
     public static void main(String[] args) {
+        ArrayList<String> results;
         //validate the arguments passed
         LostConsonants.argsCheck(args);
 
         //read in dictionary from command line
         dict = FileUtil.readLines(args[0]);
-        results = new ArrayList<String>();
+//        results = new ArrayList<String>();
 
         //read in the String from command line
         String s = args[1];
@@ -45,15 +46,16 @@ public class LostVowels {
         //mutate and validate string
         results = loseVowels(s);
 
+        LostConsonants.printResults(results);
         //print the results
-        if (!results.isEmpty()) {
-            for (int i = 0; i < results.size(); i++) {
-                System.out.println(results.get(i));
-            }
-            System.out.println("Found " + results.size() + " alternatives.");
-        } else {
-            System.out.println("Could not find any alternatives.");
-        }
+//        if (!results.isEmpty()) {
+//            for (int i = 0; i < results.size(); i++) {
+//                System.out.println(results.get(i));
+//            }
+//            System.out.println("Found " + results.size() + " alternatives.");
+//        } else {
+//            System.out.println("Could not find any alternatives.");
+//        }
     }
 
     /**
