@@ -110,16 +110,22 @@ public class LostConsonants {
     public static ArrayList<String> loseConsonant(String phrase) {
         //Create the remove ArrayList of Integers
         ArrayList<Integer> remove;
+
         /*Remove the consonants from phrase one at a time and add results to
         holder ArrayList*/
         ArrayList<String> holder = new ArrayList<>();
         holder = loseCharacter("([b-df-hj-np-tv-z])", phrase, holder);
+
         //Validate the results class variable
         remove = dictCheck(holder, dict);
+
         //Replace the full stops
         holder = replaceStop(holder);
+
         //Remove any invalid phrases from results based on the remove ArrayList
         holder = removeInValid(remove, holder);
+
+        //Return the results
         return holder;
     }
 
