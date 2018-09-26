@@ -46,16 +46,8 @@ public class LostVowels {
         //mutate and validate string
         results = loseVowels(s);
 
-        LostConsonants.printResults(results);
         //print the results
-//        if (!results.isEmpty()) {
-//            for (int i = 0; i < results.size(); i++) {
-//                System.out.println(results.get(i));
-//            }
-//            System.out.println("Found " + results.size() + " alternatives.");
-//        } else {
-//            System.out.println("Could not find any alternatives.");
-//        }
+        LostConsonants.printResults(results);
     }
 
     /**
