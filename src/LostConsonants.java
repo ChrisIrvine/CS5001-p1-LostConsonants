@@ -1,5 +1,5 @@
+//import statements
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -12,13 +12,11 @@ import java.util.regex.Matcher;
  * printed to the command line.
  *
  * @author 180009917
- * @version 2 (devolved many in method functions into seperate methods)
+ * @version 2 (devolved many in method functions into separate methods)
  */
 public class LostConsonants {
     /** List of String Arrays to hold the given dictionary. */
     private static ArrayList<String> dict;
-    /** List of String Arrays to hold the results of LostConsonants. */
-    private static ArrayList<String> results;
     /** boolean variable to account for removed full stops from given String. */
     private static boolean removedStop = false;
     /** Case 0 for args checker. */
@@ -30,16 +28,17 @@ public class LostConsonants {
 
     /**
      * Main method for LostConsonants class.
+     *
      * @param args - [0] file path to dictionary, [1] word, phrase or sentence
      *             to manipulate
      */
     public static void main(String[] args) {
+        ArrayList<String> results;
         //validate the arguments passed
         argsCheck(args);
 
         //read in dictionary from command line
         dict = FileUtil.readLines(args[0]);
-        results = new ArrayList<String>();
 
         //read in the String from command line
         String s = args[1];
@@ -51,14 +50,7 @@ public class LostConsonants {
         results = loseConsonant(s);
 
         //print the results
-        if (!results.isEmpty()) {
-            for (int i = 0; i < results.size(); i++) {
-                System.out.println(results.get(i));
-            }
-            System.out.println("Found " + results.size() + " alternatives.");
-        } else {
-            System.out.println("Could not find any alternatives.");
-        }
+        printResults(results);
     }
 
     /**
@@ -66,7 +58,7 @@ public class LostConsonants {
      * program. Then it will check if the filepath passed is good.
      * @param args - arguments passed from the command line
      */
-    public static void argsCheck(String[] args) {
+    static void argsCheck(String[] args) {
         //Check if the number of arguments is good
         switch (args.length) {
             case ZERO: System.out.println("Expected 2 command line arguments"
@@ -96,7 +88,6 @@ public class LostConsonants {
                     + "aborting.");
             System.exit(0);
         }
-
     }
 
     /**
@@ -107,19 +98,25 @@ public class LostConsonants {
      * @param phrase - String to mutate
      * @return - Filled and Valid ArrayList of Mutated Strings
      */
-    public static ArrayList<String> loseConsonant(String phrase) {
+    private static ArrayList<String> loseConsonant(String phrase) {
         //Create the remove ArrayList of Integers
         ArrayList<Integer> remove;
+
         /*Remove the consonants from phrase one at a time and add results to
         holder ArrayList*/
         ArrayList<String> holder = new ArrayList<>();
         holder = loseCharacter("([b-df-hj-np-tv-z])", phrase, holder);
+
         //Validate the results class variable
         remove = dictCheck(holder, dict);
+
         //Replace the full stops
         holder = replaceStop(holder);
+
         //Remove any invalid phrases from results based on the remove ArrayList
         holder = removeInValid(remove, holder);
+
+        //Return the results
         return holder;
     }
 
@@ -132,7 +129,7 @@ public class LostConsonants {
      * @param holder - ArrayList to add results to
      * @return - filled ArrayList of Strings
      */
-    public static ArrayList<String> loseCharacter(String regex, String phrase,
+    static ArrayList<String> loseCharacter(String regex, String phrase,
                                                   ArrayList<String> holder) {
         Pattern p = Pattern.compile(regex,
                 Pattern.CASE_INSENSITIVE);
@@ -162,9 +159,10 @@ public class LostConsonants {
      * (remove) which is returned
      *
      * @param holder - ArrayList of Strings holding current results
+     * @param dict - ArrayList of Strings to validate mutated words against
      * @return - ArrayList of Integers containing indexes to remove from results
      */
-    public static ArrayList<Integer> dictCheck(ArrayList<String> holder,
+    static ArrayList<Integer> dictCheck(ArrayList<String> holder,
                                                ArrayList<String> dict) {
         ArrayList<Integer> remove = new ArrayList<>();
         int removeIndex = 0;
@@ -173,7 +171,6 @@ public class LostConsonants {
             String test = holder.get(i);
             String[] check = test.split(" ");
             boolean notValid = false;
-
             for (int j = 0; j < check.length; j++) {
                 /* Idea to use this lambda expression instead of the
                  * ArrayList.contains() method originated from the referenced
@@ -184,7 +181,7 @@ public class LostConsonants {
                  * contains-case-sensitivity
                  */
                 int finalJ = j;
-                if (!dict.stream().anyMatch(s ->
+                if (dict.stream().noneMatch(s ->
                         s.equalsIgnoreCase(check[finalJ]))
                         && !check[finalJ].contains(",")
                         && !check[finalJ].contains(".")) {
@@ -208,7 +205,7 @@ public class LostConsonants {
      * @param holder - ArrayList of Strings holding current results
      * @return - mutated ArrayList of Strings
      */
-    public static ArrayList<String> replaceStop(ArrayList<String> holder) {
+    static ArrayList<String> replaceStop(ArrayList<String> holder) {
         //Check if a full stop had been removed, if so then add it back in.
         if (removedStop) {
             for (int i = 0; i < holder.size(); i++) {
@@ -231,14 +228,14 @@ public class LostConsonants {
      * @param holder - ArrayList of Strings holding current results
      * @return - mutated ArrayList of Strings
      */
-    public static ArrayList<String> removeInValid(ArrayList<Integer> removeList,
+    static ArrayList<String> removeInValid(ArrayList<Integer> removeList,
                                      ArrayList<String> holder) {
         if (!removeList.isEmpty()) {
             int[] removeArray = listToArrInt(removeList);
             removeArray = quicksort(removeArray, 0, removeArray.length - 1);
 
-            for (int i = 0; i < removeArray.length; i++) {
-                holder.remove(removeArray[i]);
+            for (int aRemoveArray : removeArray) {
+                holder.remove(aRemoveArray);
             }
         }
         return holder;
@@ -253,7 +250,7 @@ public class LostConsonants {
      * @param high - the highest index of the target array
      * @return - sorted array (in descending order)
      */
-    public static int[] quicksort(int[] target, int low, int high) {
+    private static int[] quicksort(int[] target, int low, int high) {
         int l = low;
         int h = high;
         int temp = 0;
@@ -292,10 +289,10 @@ public class LostConsonants {
      * @param list - List to convert to array
      * @return - returns an array of integers
      */
-    public static int[] listToArrInt(List<Integer> list) {
+    private static int[] listToArrInt(List<Integer> list) {
         int[] array = new int[list.size()];
         for (int i = 0; i < array.length; i++) {
-            array[i] = list.get(i).intValue();
+            array[i] = list.get(i);
         }
         return array;
     }
@@ -307,7 +304,7 @@ public class LostConsonants {
      * @param s - String to remove the full stop from
      * @return - String with any full stops removed from it.
      */
-    public static String removeFullStop(String s) {
+    static String removeFullStop(String s) {
         if (s.contains(".") && s.indexOf(".") != s.length() - 1) {
             s = s.substring(0, s.indexOf("."))
                     + s.substring(s.indexOf(".") + 1);
@@ -318,5 +315,23 @@ public class LostConsonants {
         }
 
         return s;
+    }
+
+    /**
+     * Simple method to print and count the number of Strings in the results
+     * ArrayList.
+     *
+     * @param results - ArrayList of Strings to print
+     */
+    static void printResults(ArrayList<String> results) {
+        //print the results
+        if (!results.isEmpty()) {
+            for (String result : results) {
+                System.out.println(result);
+            }
+            System.out.println("Found " + results.size() + " alternatives.");
+        } else {
+            System.out.println("Could not find any alternatives.");
+        }
     }
 }
