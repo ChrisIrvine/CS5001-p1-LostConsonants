@@ -1,3 +1,4 @@
+//import statements
 import java.util.ArrayList;
 
 /**
@@ -12,19 +13,10 @@ import java.util.ArrayList;
 public class LostVowels {
     /** List of String Arrays to hold the given dictionary. */
     private static ArrayList<String> dict;
-//    /** List of String Arrays to hold the results of LostVowels. */
-//    private static ArrayList<String> results;
-//    /** boolean variable to account for removed full stops from given String. */
-//    private static boolean removedStop = false;
-//    /** Case 0 for args checker. */
-//    private static final int ZERO = 0;
-//    /** Case 1 for args checker. */
-//    private static final int ONE = 1;
-//    /** Case 3 for args checker. */
-//    private static final int THREE = 3;
 
     /**
      * Main method for LostVowels class.
+     *
      * @param args - [0] file path to dictionary, [1] word, phrase or sentence
      *             to manipulate
      */
@@ -35,7 +27,6 @@ public class LostVowels {
 
         //read in dictionary from command line
         dict = FileUtil.readLines(args[0]);
-//        results = new ArrayList<String>();
 
         //read in the String from command line
         String s = args[1];
@@ -58,14 +49,14 @@ public class LostVowels {
      * @param phrase - String to mutate
      * @return - Filled and Validated ArrayList of Mutated Strings
      */
-    public static ArrayList<String> loseVowels(String phrase) {
+    private static ArrayList<String> loseVowels(String phrase) {
         //Create the remove ArrayList of Integers
         ArrayList<Integer> remove;
 
         /*Remove the consonants from phrase one at a time and add results to
         holder ArrayList*/
         ArrayList<String> holder = new ArrayList<>();
-        holder = LostConsonants.loseCharacter("([b-df-hj-np-tv-z])",
+        holder = LostConsonants.loseCharacter("([aeiou])",
                 phrase, holder);
 
         //Validate the results class variable

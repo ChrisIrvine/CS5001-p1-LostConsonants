@@ -1,6 +1,13 @@
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * Class to add characters to a given string, evaluate the mutated string and
+ * then print the validated string.
+ *
+ * @author 180009917
+ * @version 1
+ */
 public class AddCharacter {
     /** Dictionary to evaluate the new phrases against. */
     private static ArrayList<String> dict;
@@ -8,8 +15,6 @@ public class AddCharacter {
     private static final int ZERO = 0;
     /** One (1) value for argsCheck Switch Statement. */
     private static final int ONE = 1;
-    /** Two (2) value for argsCheck Switch Statement. */
-    private static final int TWO = 2;
     /** Four (4) value for argsCheck Switch Statement. */
     private static final int FOUR = 4;
     /** Integer to inform program which set of characters to add. */
@@ -20,7 +25,9 @@ public class AddCharacter {
      * from the command line, extract their values, prepare the phrase for
      * mutation, mutate then validate the phrase and print the validated
      * results.
-     * @param args - arguments passed from the command line.
+     * @param args - [0] = filepath to dictionary of words, [1] = word, phrase
+     *             or sentence to mutate, [2] = integer declaring which
+     *             character set to use
      */
     public static void main(String[] args) {
         ArrayList<String> results;
@@ -33,8 +40,15 @@ public class AddCharacter {
         //read in the String from command line
         String s = args[1];
 
-        //Consonant (0) or Vowel (1)
-        whichChar = Integer.parseInt(args[2]);
+        /*Determine if user wants consonants (default), vowel (1)
+         or alphabet (0).*/
+        if (args.length == 2) {
+            whichChar = 2;
+        } else if (Integer.parseInt(args[2]) == 0) {
+            whichChar = 1;
+        } else {
+            whichChar = 0;
+        }
 
         //prepare string for mutation
         s = LostConsonants.removeFullStop(s);
@@ -50,38 +64,32 @@ public class AddCharacter {
      * Method to check the number of arguments passed into the program and to
      * then validate the path to the dictionary file (checks to see if the file
      * is a .txt file).
+     *
      * @param args - array of arguments passed from the command line.
      */
     private static void argsCheck(String[] args) {
         //Check if the number of arguments is good
         switch (args.length) {
-            case ZERO: System.out.println("Expected 3 command line arguments"
-                    + ", but got 0.\nPlease provide the path to the dictionary "
-                    + "file as the first argument and a sentence as the "
-                    + "second argument, with an int as the third argument (0 "
-                    + "for vowels, 1 for the entire alphabet and any other"
-                    + "number for consonants).");
+            case ZERO: System.out.println("Expected 2 or 3 command line "
+                    + "arguments, but got 0.\nPlease provide the path to the "
+                    + "dictionary file as the first argument and a sentence as "
+                    + "the second argument, with an int as the third argument "
+                    + "(0 for vowels, 1 for the entire alphabet and leave blank"
+                    + " for consonants).");
                 System.exit(0);
-            case ONE: System.out.println("Expected 3 command line arguments"
-                    + ", but got 1.\nPlease provide the path to the dictionary "
-                    + "file as the first argument and a sentence as the "
-                    + "second argument, with an int as the third argument (0 "
-                    + "for vowels, 1 for the entire alphabet and any other"
-                    + "number for consonants).");
+            case ONE: System.out.println("Expected 2 or 3 command line "
+                    + "arguments, but got 1.\nPlease provide the path to the "
+                    + "dictionary file as the first argument and a sentence as "
+                    + "the second argument, with an int as the third argument "
+                    + "(0 for vowels, 1 for the entire alphabet and leave blank"
+                    + " for consonants).");
                 System.exit(0);
-            case TWO: System.out.println("Expected 3 command line arguments"
-                    + ", but got 2.\nPlease provide the path to the dictionary "
-                    + "file as the first argument and a sentence as the "
-                    + "second argument, with an int as the third argument (0 "
-                    + "for vowels, 1 for the entire alphabet and any other"
-                    + "number for consonants).");
-                System.exit(0);
-            case FOUR: System.out.println("Expected 3 command line arguments"
-                    + ", but got 4.\nPlease provide the path to the dictionary "
-                    + "file as the first argument and a sentence as the "
-                    + "second argument, with an int as the third argument (0 "
-                    + "for vowels, 1 for the entire alphabet and any other"
-                    + "number for consonants).");
+            case FOUR: System.out.println("Expected 2 or 3 command line "
+                    + "arguments, but got 4.\nPlease provide the path to the "
+                    + "dictionary file as the first argument and a sentence as "
+                    + "the second argument, with an int as the third argument "
+                    + "(0 for vowels, 1 for the entire alphabet and leave blank"
+                    + " for consonants).");
                 System.exit(0);
             default: break;
         }
@@ -135,14 +143,14 @@ public class AddCharacter {
      * @return - ArrayList of valid mutated phrases.
      */
     private static ArrayList<String> addCharacter(int charCode, String phrase,
-                                                 ArrayList<String> results){
+                                                 ArrayList<String> results) {
         //Delcare class variables
         char[] addChar;
         ArrayList<Character> phraseChars = new ArrayList<>();
 
         //Decide which set of characters to add (consonants, vowels or all)
         if (charCode == 0) {
-            addChar= "aeiou".toCharArray();
+            addChar = "aeiou".toCharArray();
         } else if (charCode == 1) {
             addChar = "abcdefghijklomnopqrstuvwxyz".toCharArray();
         } else {

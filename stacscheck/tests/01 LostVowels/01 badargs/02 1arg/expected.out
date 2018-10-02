@@ -1,0 +1,2 @@
+Expected 2 command line arguments, but got 1.
+Please provide the path to the dictionary file as the first argument and a sentence as the second argument.
